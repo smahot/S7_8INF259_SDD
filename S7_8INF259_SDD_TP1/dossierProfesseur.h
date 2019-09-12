@@ -4,16 +4,16 @@
 using namespace std;
 
 
-struct cours {
+struct Cours {
 	char* sigle;
 	int nbEtudints;
-	cours* suivant;
+	Cours* suivant;
 };
 
 struct Professeur{
 	char* nom;
 	int anciennete;
-	cours* listeCours;
+	Cours* listeCours;
 	Professeur* suivant;
 };
 
