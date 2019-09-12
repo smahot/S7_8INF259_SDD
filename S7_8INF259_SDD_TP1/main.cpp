@@ -1,7 +1,37 @@
-#include <stdio.h>
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
 
-int main(int argc, char **argv)
+
+struct cours {
+	char* sigle;
+	int nbEtudints;
+	cours* suivant;
+};
+
+struct Professeur{
+	char* nom;
+	int anciennete;
+	cours* listeCours;
+	Professeur* suivant;
+};
+
+Professeur* creationListe(FILE* fichier) {
+	Professeur* liste = (Professeur*)malloc(1*sizeof Professeur);
+	if (fichier != NULL)
+	{
+		string ligne;
+		ifstream entree;
+
+	}
+}
+
+class DossierProfesseur {
+	Professeur* tete;
+};
+
+int main()
 {
-	printf("hello world\n");
-	return 0;
+    cout << "Hello World!\n"; 
 }
