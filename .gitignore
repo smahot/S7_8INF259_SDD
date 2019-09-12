@@ -1,5 +1,6 @@
 .codelite
 .vscode
 .vs
-S7_8INF259_SDD_TP1/Debug
-S7_8INF259_SDD_TP1/*.vcxproj.*
+S7_8INF259_SDD_TP*/Debug
+S7_8INF259_SDD_TP*/*.vcxproj.*
+S7_8INF259_SDD_TP*/x64
