@@ -6,7 +6,7 @@ using namespace std;
 
 typedef struct Cours {
 	char* sigle;
-	int nbEtudints;
+	int nbEtudiants;
 	Cours* suivant;
 } Cours;
 
