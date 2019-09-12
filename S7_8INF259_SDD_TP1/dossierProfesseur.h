@@ -4,18 +4,18 @@
 using namespace std;
 
 
-struct Cours {
+typedef struct Cours {
 	char* sigle;
 	int nbEtudints;
 	Cours* suivant;
-};
+} Cours;
 
-struct Professeur{
+typedef struct Professeur{
 	char* nom;
 	int anciennete;
 	Cours* listeCours;
 	Professeur* suivant;
-};
+} Professeur;
 
 class DossierProfesseur {
 private:
