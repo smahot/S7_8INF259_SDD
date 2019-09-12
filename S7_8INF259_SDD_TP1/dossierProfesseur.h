@@ -19,13 +19,13 @@ struct Professeur{
 
 class DossierProfesseur {
 private:
-	Professeur* tete; // début de la liste chaînée.
+	Professeur* tete; // dÃ©but de la liste chaÃ®nÃ©e.
 public:
-	DossierProfesseur(char* FP); // construit la liste chaînée en mémoire à partir du fichier FP.
-	~DossierProfesseur(); // détruit la liste chaînée existant en mémoire.
-	void Supprimer(char* NOM); // supprime de la liste chaînée le professeur NOM.
+	DossierProfesseur(char* FP); // construit la liste chaÃ®nÃ©e en mÃ©moire Ã  partir du fichier FP.
+	~DossierProfesseur(); // dÃ©truit la liste chaÃ®nÃ©e existant en mÃ©moire.
+	void Supprimer(char* NOM); // supprime de la liste chaÃ®nÃ©e le professeur NOM.
 	int Commun(char* X, char* Y); // affiche le nombre de cours en commun entre les profs X et Y.
-	char* LecoursLeplusDemande() const; // affiche le cours le plus demandé de la liste chaînée. En	cas de solutions multiples, prendre celui ayant le plus d’étudiants.
+	char* LecoursLeplusDemande() const; // affiche le cours le plus demandÃ© de la liste chaÃ®nÃ©e. En	cas de solutions multiples, prendre celui ayant le plus dâ€™Ã©tudiants.
 	char* ProfeseurLeplusAncien() const; // affiche le nom du professeur le plus ancien.
-	void Recopier(char* Nouveau); // recopie à partir de la liste chaînée le nom, ancienneté et le nombre de cours demandés pour chaque professeur dans le fichier texte Nouveau.
+	void Recopier(char* Nouveau); // recopie Ã  partir de la liste chaÃ®nÃ©e le nom, anciennetÃ© et le nombre de cours demandÃ©s pour chaque professeur dans le fichier texte Nouveau.
 };
