@@ -13,9 +13,7 @@ Professeur* creationListe(FILE* fichier) {
 
 class DossierProfesseur {
 private:
-	Professeur* tete ()
-	{
-	}
+	Professeur* tete;
 
 public:
 	DossierProfesseur(char* FP)
