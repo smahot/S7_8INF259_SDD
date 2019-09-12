@@ -1,2 +1,5 @@
 .codelite
 .vscode
+.vs
+S7_8INF259_SDD_TP1/Debug
+S7_8INF259_SDD_TP1/*.vcxproj*
