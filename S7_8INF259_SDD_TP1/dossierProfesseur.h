@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-using namespace std;
-
 
 typedef struct Cours {
 	char* sigle;
