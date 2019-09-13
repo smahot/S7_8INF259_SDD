@@ -64,7 +64,32 @@ DossierProfesseur::DossierProfesseur(char* FP){
 
 //destructeur
 DossierProfesseur::~DossierProfesseur() {
+	Professeur* pointeurProfesseur = tete;
 
+	while (pointeurProfesseur)
+	{
+		pointeurProfesseur->anciennete = 0;
+		delete pointeurProfesseur->nom;
+		pointeurProfesseur->nom = NULL;
+
+		Cours* pointeurCours = pointeurProfesseur->listeCours;		
+		while (pointeurCours)
+		{
+			delete pointeurCours->sigle;
+			pointeurCours->sigle = NULL;
+			pointeurCours->nbEtudiants = 0;
+
+			Cours* pointeurCoursSup = pointeurCours;
+			pointeurCours = pointeurCours->suivant;
+			delete pointeurCoursSup;
+		}
+		pointeurProfesseur->listeCours = NULL;
+
+		Professeur* pointeurProfesseurSup = pointeurProfesseur;
+		pointeurProfesseur = pointeurProfesseur->suivant;
+		delete pointeurProfesseurSup;
+	}
+	tete = NULL;
 }
 
 void DossierProfesseur::Supprimer(char* nom) {
