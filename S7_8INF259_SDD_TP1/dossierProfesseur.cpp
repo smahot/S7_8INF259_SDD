@@ -19,7 +19,7 @@ DossierProfesseur::DossierProfesseur(char* FP){
 		Professeur** pointeurProfesseur = &tete;
 
 		//boucle des profs
-		while (ligne != "&" && getline(entree, ligne))
+		while (getline(entree, ligne))
 		{
 			(*pointeurProfesseur) = (Professeur*)malloc(sizeof(Professeur));
 
@@ -42,7 +42,7 @@ DossierProfesseur::DossierProfesseur(char* FP){
 				{
 					(*pointeurCours) = (Cours*)malloc(sizeof(Cours));
 
-					if (*pointeurCours)
+					if (*pointeurCours) //C6011
 					{
 						(*pointeurCours)->sigle = new char[ligne.length() + 1];
 						strcpy((*pointeurCours)->sigle, (char*)ligne.c_str());
@@ -51,12 +51,12 @@ DossierProfesseur::DossierProfesseur(char* FP){
 
 						(*pointeurCours)->nbEtudiants = atoi(ligne.c_str());
 						(*pointeurCours)->suivant = NULL;
-						pointeurCours = &(*pointeurCours)->suivant;
+						if (*pointeurCours) pointeurCours = &(*pointeurCours)->suivant; //C6011
 					}
 				}
 
 				(*pointeurProfesseur)->suivant = NULL;
-				pointeurProfesseur = &(*pointeurProfesseur)->suivant;
+				if (*pointeurProfesseur) pointeurProfesseur = &(*pointeurProfesseur)->suivant; //C6011
 			}
 		}
 	}
