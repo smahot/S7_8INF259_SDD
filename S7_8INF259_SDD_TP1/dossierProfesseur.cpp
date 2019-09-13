@@ -51,12 +51,12 @@ DossierProfesseur::DossierProfesseur(char* FP){
 
 						(*pointeurCours)->nbEtudiants = atoi(ligne.c_str());
 						(*pointeurCours)->suivant = NULL;
-						(*pointeurCours) = (*pointeurCours)->suivant;
+						pointeurCours = &(*pointeurCours)->suivant;
 					}
 				}
 
 				(*pointeurProfesseur)->suivant = NULL;
-				(*pointeurProfesseur) = (*pointeurProfesseur)->suivant;
+				pointeurProfesseur = &(*pointeurProfesseur)->suivant;
 			}
 		}
 	}
