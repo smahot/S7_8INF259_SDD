@@ -14,47 +14,49 @@ DossierProfesseur::DossierProfesseur(char* FP){
 	{
 		string ligne;
 
-		this->tete = (Professeur*)malloc(sizeof(Professeur));
-		Professeur* pointeurProfesseur = tete;
+		this->tete = NULL;
+		//pointeur vers l'adresse du pointeur vers le professeur
+		Professeur** pointeurProfesseur = &tete;
 
 		//boucle des profs
 		while (ligne != "&" && getline(entree, ligne))
 		{
-			//condition à vérifier pour utiliser un attribut d'un pointeur attribué dynamiquement, cf avertissement C6011 : https://docs.microsoft.com/fr-fr/visualstudio/code-quality/c6011?view=vs-2019
-			if (pointeurProfesseur)
-			{
-				pointeurProfesseur->suivant = (Professeur*)malloc(sizeof(Professeur));
+			(*pointeurProfesseur) = (Professeur*)malloc(sizeof(Professeur));
 
+			//condition à vérifier cf avertissement C6011 : https://docs.microsoft.com/fr-fr/visualstudio/code-quality/c6011?view=vs-2019
+			if (*pointeurProfesseur)
+			{
 				//allocation du pointeur nom et copie de la ligne dans l'espace mémoire du pointeur
-				pointeurProfesseur->nom = new char[ligne.length() + 1];
-				strcpy(pointeurProfesseur->nom, (char*)ligne.c_str());
+				(*pointeurProfesseur)->nom = new char[ligne.length() + 1];
+				strcpy((*pointeurProfesseur)->nom, (char*)ligne.c_str());
 
 				//ligne suivante
 				getline(entree, ligne);
 
-				pointeurProfesseur->anciennete = atoi(ligne.c_str());
+				(*pointeurProfesseur)->anciennete = atoi(ligne.c_str());
 				
-				pointeurProfesseur->listeCours = (Cours*)malloc(sizeof(Cours));
-				Cours* pointeurCours = pointeurProfesseur->listeCours;
+				(*pointeurProfesseur)->listeCours = NULL;
+				Cours** pointeurCours = &(*pointeurProfesseur)->listeCours;
 				//boucle des cours
 				while (getline(entree, ligne) && ligne != "&")
 				{
-					if (!pointeurCours)
-					pointeurCours = (Cours*)malloc(sizeof(Cours));
+					(*pointeurCours) = (Cours*)malloc(sizeof(Cours));
 
-					if (pointeurCours)
+					if (*pointeurCours)
 					{
-						pointeurCours->sigle = new char[ligne.length() + 1];
-						strcpy(pointeurCours->sigle, (char*)ligne.c_str());
+						(*pointeurCours)->sigle = new char[ligne.length() + 1];
+						strcpy((*pointeurCours)->sigle, (char*)ligne.c_str());
 
 						getline(entree, ligne);
 
-						pointeurCours->nbEtudiants = atoi(ligne.c_str());
-						pointeurCours->suivant = NULL;
+						(*pointeurCours)->nbEtudiants = atoi(ligne.c_str());
+						(*pointeurCours)->suivant = NULL;
+						(*pointeurCours) = (*pointeurCours)->suivant;
 					}
 				}
 
-				pointeurProfesseur->suivant = NULL;
+				(*pointeurProfesseur)->suivant = NULL;
+				(*pointeurProfesseur) = (*pointeurProfesseur)->suivant;
 			}
 		}
 	}
