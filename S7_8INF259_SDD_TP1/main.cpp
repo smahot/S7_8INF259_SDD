@@ -7,8 +7,12 @@ using namespace std;
 int main()
 {		
 	DossierProfesseur unDossier = DossierProfesseur("dossier.txt");
+
+	cout << "Prof le plus ancien : " << unDossier.ProfeseurLeplusAncien();
+
 	unDossier.afficherListe();
 	unDossier.Supprimer("MAHOT Steve");
 	unDossier.afficherListe();
+	
 	system("pause");
 }
