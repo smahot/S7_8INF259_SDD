@@ -60,6 +60,7 @@ DossierProfesseur::DossierProfesseur(char* FP){
 			}
 		}
 	}
+	entree.close();
 }
 
 //destructeur
@@ -92,8 +93,30 @@ DossierProfesseur::~DossierProfesseur() {
 	tete = NULL;
 }
 
+//Méthode pour supprimer un professeur du dossier
 void DossierProfesseur::Supprimer(char* nom) {
-
+	Professeur* temp = (Professeur*)malloc(sizeof(Professeur));
+	Professeur* prec = (Professeur*)malloc(sizeof(Professeur));
+	temp = tete;
+	if (temp)
+	{
+		while (temp != NULL && temp->nom != nom)
+		{
+			prec = temp;
+			temp = temp->suivant;
+		}
+		if (temp->nom == nom && temp->suivant != NULL)
+		{
+			prec->suivant = temp->suivant;
+			cout << "Suppression ok. Pas en queue.";
+		}
+		else if (temp->nom == nom && temp->suivant == NULL)
+		{
+			prec->suivant = NULL;
+			cout << "Suppression ok. En queue.";
+		}
+		else cout << "Le professeur n'apparait pas dans la liste. Nous n'avons pas effectuer sa suppression." << endl;
+	}
 }
 
 int DossierProfesseur::Commun(char* X, char* Y) {
@@ -112,4 +135,22 @@ char* DossierProfesseur::ProfeseurLeplusAncien() const {
 
 void DossierProfesseur::Recopier(char* Nouveau) {
 
+}
+
+void DossierProfesseur::afficherListe()
+{
+	Professeur* temp = tete;
+	if (tete == NULL) cout << "Liste NULL  ." << endl;
+	while (temp != NULL)
+	{
+		cout << "nom : " << temp->nom << endl;
+		cout << "anciennete : " << temp->anciennete << endl;
+		while (temp->listeCours != NULL)
+		{
+			cout << "Nom cours : " << temp->listeCours->sigle << endl;
+			cout << "Nb etudiants : " << temp->listeCours->nbEtudiants << endl;
+			temp->listeCours = temp->listeCours->suivant;
+		}
+		temp = temp->suivant;
+	}
 }

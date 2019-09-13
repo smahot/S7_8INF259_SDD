@@ -5,11 +5,10 @@
 using namespace std;
 
 int main()
-{
-    cout << "Hello World!\n";
-	{
-		DossierProfesseur dossierProf("dossier.txt");
-	}
-	
+{		
+	DossierProfesseur unDossier = DossierProfesseur("dossier.txt");
+	unDossier.afficherListe();
+	unDossier.Supprimer("MAHOT Steve");
+	unDossier.afficherListe();
 	system("pause");
 }
