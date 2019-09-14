@@ -185,7 +185,28 @@ char* DossierProfesseur::ProfeseurLeplusAncien() const {
 }
 
 void DossierProfesseur::Recopier(char* Nouveau) {
+	Professeur* copieTete = tete;
+	ofstream sortie(Nouveau, ios::out | ios::trunc);
+	if (sortie)
+	{
+		while (copieTete != NULL)
+		{
+			sortie << copieTete->nom << endl;
+			sortie << copieTete->anciennete << endl;
 
+			Cours* copieCours = copieTete->listeCours;
+			while (copieCours != NULL)
+			{
+				sortie << copieCours->sigle << endl;
+				sortie << copieCours->nbEtudiants << endl;
+				copieCours = copieCours->suivant;
+			}
+			sortie << "&" << endl;
+			copieTete = copieTete->suivant;
+		}
+		sortie.close();
+	}
+	else cout << "Erreur à l'ouverture !" << endl;
 }
 
 void DossierProfesseur::afficherListe(){

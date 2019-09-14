@@ -12,6 +12,6 @@ int main()
 	unDossier.afficherListe();
 
 	//unDossier.Supprimer("MACRON Emmanuel");
-
+	unDossier.Recopier("sortie.txt");
 	system("pause");
 }
