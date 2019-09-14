@@ -106,7 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="dossier.txt" />
-    <Text Include="sortie.txt" />
+    <Text Include="fichierSortie.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
