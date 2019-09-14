@@ -137,9 +137,31 @@ char* DossierProfesseur::LecoursLeplusDemande() const {
 	return coursLePlusDemande;
 }
 
+
+/*
+Renvoie le professeur le plus ancien.
+Si plusieurs professeur ont la même ancienneté, renvoie le premier trouvé.
+Car la signature imposée de la fonction ne permet pas de renvoyer plusieurs noms.
+*/
 char* DossierProfesseur::ProfeseurLeplusAncien() const {
-	char* kirikou = (char*)malloc(sizeof(char));
-	return kirikou;
+	Professeur* profLePlusAge = tete; // pointeur vers le professeur le plus ancien
+	Professeur* pointeurProfesseur = tete; // pointeur vers le professeur qui est lu actuellement
+	int ancienneteMax = tete->anciennete; // ancienneté du professeur le plus ancien trouvé
+	
+	// boucle sur les professeurs
+	while (pointeurProfesseur->suivant)
+	{
+		//on passe au prof suivant
+		pointeurProfesseur = pointeurProfesseur->suivant;
+
+		//si le prof suivant est plus ancien, on maj les infos sur le prof le plus ancien
+		if (pointeurProfesseur->anciennete > ancienneteMax)
+		{
+			profLePlusAge = pointeurProfesseur;
+			ancienneteMax = pointeurProfesseur->anciennete;
+		}
+	}
+	return profLePlusAge->nom;
 }
 
 void DossierProfesseur::Recopier(char* Nouveau) {
