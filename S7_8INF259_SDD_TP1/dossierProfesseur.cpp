@@ -137,23 +137,23 @@ Car la signature imposée de la fonction ne permet pas de renvoyer plusieurs cou
 */
 char* DossierProfesseur::LecoursLeplusDemande() const {
 	//Déclaration du paramètre que l'on recupèrera en sortie
-	char* coursLePlusDemande = (char*)malloc(7*sizeof(char));
+	char* coursLePlusDemande = NULL;
 	int nombreEleve = -1;
-	Professeur* copieTete = tete; //On effectue une copie de la tete afin de ne pas risquer de modifier son contenu
-	while (copieTete != NULL)
+	Professeur* pointeurProfesseur = tete; //pointeur vers le professeur
+	while (pointeurProfesseur != NULL)
 	{
-		Cours* copieCours = copieTete->listeCours; //On effectue une copie de la liste de cours afin de ne pas risquer de modifier son contenu
-		while (copieCours != NULL)
+		Cours* pointeurCours = pointeurProfesseur->listeCours; //pointeur vers le cours
+		while (pointeurCours != NULL)
 		{
-			//Si le cours a un nb d'étudiant supérieur à celui en mémoir alors on actualise
-			if ( copieCours->nbEtudiants > nombreEleve)
+			//Si le cours a un nb d'étudiant supérieur à celui en mémoire alors on actualise
+			if (pointeurCours->nbEtudiants > nombreEleve)
 			{
-				coursLePlusDemande = copieCours->sigle;
-				nombreEleve = copieCours->nbEtudiants;
+				coursLePlusDemande = pointeurCours->sigle;
+				nombreEleve = pointeurCours->nbEtudiants;
 			}
-			copieCours = copieCours->suivant;
+			pointeurCours = pointeurCours->suivant;
 		}
-		copieTete = copieTete->suivant;
+		pointeurProfesseur = pointeurProfesseur->suivant;
 	}
 	return coursLePlusDemande;
 }
