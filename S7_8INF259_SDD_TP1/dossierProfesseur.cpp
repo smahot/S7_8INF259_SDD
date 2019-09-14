@@ -130,13 +130,33 @@ int DossierProfesseur::Commun(char* X, char* Y) {
 	return -1;
 }
 
+/*
+Renvoie le cours le plus demandé.
+Si plusieurs cours ont le même nombre d'étudiants, renvoie le premier trouvé.
+Car la signature imposée de la fonction ne permet pas de renvoyer plusieurs cours.
+*/
 char* DossierProfesseur::LecoursLeplusDemande() const {
 	//Déclaration du paramètre que l'on recupèrera en sortie
 	char* coursLePlusDemande = (char*)malloc(7*sizeof(char));
-
+	int nombreEleve = -1;
+	Professeur* copieTete = tete; //On effectue une copie de la tete afin de ne pas risquer de modifier son contenu
+	while (copieTete != NULL)
+	{
+		Cours* copieCours = copieTete->listeCours; //On effectue une copie de la liste de cours afin de ne pas risquer de modifier son contenu
+		while (copieCours != NULL)
+		{
+			//Si le cours a un nb d'étudiant supérieur à celui en mémoir alors on actualise
+			if ( copieCours->nbEtudiants > nombreEleve)
+			{
+				coursLePlusDemande = copieCours->sigle;
+				nombreEleve = copieCours->nbEtudiants;
+			}
+			copieCours = copieCours->suivant;
+		}
+		copieTete = copieTete->suivant;
+	}
 	return coursLePlusDemande;
 }
-
 
 /*
 Renvoie le professeur le plus ancien.
@@ -168,8 +188,7 @@ void DossierProfesseur::Recopier(char* Nouveau) {
 
 }
 
-void DossierProfesseur::afficherListe()
-{
+void DossierProfesseur::afficherListe(){
 	Professeur* temp = tete;
 	if (tete == NULL) cout << "Liste NULL  ." << endl;
 	while (temp != NULL)

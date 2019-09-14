@@ -1,5 +1,5 @@
 MAHOT Steve
-2
+3
 INF100
 13
 INF101
@@ -10,7 +10,7 @@ RODRIGUEZ ALVAR Nieves
 INF102
 11
 INF103
-11
+500
 &
 MACRON Emmanuel
 1
