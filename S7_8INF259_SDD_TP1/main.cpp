@@ -8,7 +8,7 @@ int main()
 {		
 	DossierProfesseur unDossier = DossierProfesseur("dossier.txt");
 	unDossier.afficherListe();
-	unDossier.Supprimer("MAHOT Steve");
+	unDossier.Supprimer("MACRON Emmanuel");
 	unDossier.afficherListe();
 	system("pause");
 }

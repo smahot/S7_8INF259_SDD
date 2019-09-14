@@ -95,24 +95,31 @@ DossierProfesseur::~DossierProfesseur() {
 
 //Méthode pour supprimer un professeur du dossier
 void DossierProfesseur::Supprimer(char* nom) {
-	Professeur* temp = (Professeur*)malloc(sizeof(Professeur));
-	Professeur* prec = (Professeur*)malloc(sizeof(Professeur));
-	temp = tete;
-	if (temp)
+	//déclaration d'un pointeur temporaire afin de parcourir la liste sans perdre ni modifier la tete
+	Professeur** pointeurProfesseur = &tete;
+	//déclaration d'un pointeur pour gerder en mémoire la position précédente. Au départ il s'agit de la tete
+	Professeur** pointeurPrecedent = &tete;
+
+	(*pointeurProfesseur) = (Professeur*)malloc(sizeof(Professeur));
+	(*pointeurPrecedent) = (Professeur*)malloc(sizeof(Professeur));
+
+	if ((*pointeurProfesseur) && (*pointeurPrecedent))
 	{
-		while (temp != NULL && temp->nom != nom)
+		while ((*pointeurProfesseur) != NULL && (*pointeurProfesseur)->nom != nom)
 		{
-			prec = temp;
-			temp = temp->suivant;
+			(*pointeurPrecedent) = (*pointeurProfesseur);
+			(*pointeurProfesseur) = (*pointeurProfesseur)->suivant;
 		}
-		if (temp->nom == nom && temp->suivant != NULL)
+		if ((*pointeurProfesseur)->nom == nom && (*pointeurProfesseur)->suivant != NULL)
 		{
-			prec->suivant = temp->suivant;
+			(*pointeurPrecedent)->suivant = (*pointeurProfesseur)->suivant;
+			delete (*pointeurProfesseur);
 			cout << "Suppression ok. Pas en queue.";
 		}
-		else if (temp->nom == nom && temp->suivant == NULL)
+		else if ((*pointeurProfesseur)->nom == nom && (*pointeurProfesseur)->suivant == NULL)
 		{
-			prec->suivant = NULL;
+			(*pointeurPrecedent)->suivant = NULL;
+			delete (*pointeurProfesseur);
 			cout << "Suppression ok. En queue.";
 		}
 		else cout << "Le professeur n'apparait pas dans la liste. Nous n'avons pas effectuer sa suppression." << endl;
@@ -124,8 +131,10 @@ int DossierProfesseur::Commun(char* X, char* Y) {
 }
 
 char* DossierProfesseur::LecoursLeplusDemande() const {
-	char* kirikou = (char*)malloc(sizeof(char));
-	return kirikou;
+	//Déclaration du paramètre que l'on recupèrera en sortie
+	char* coursLePlusDemande = (char*)malloc(7*sizeof(char));
+
+	return coursLePlusDemande;
 }
 
 char* DossierProfesseur::ProfeseurLeplusAncien() const {
