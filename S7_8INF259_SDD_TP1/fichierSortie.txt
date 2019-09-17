@@ -6,3 +6,11 @@ RODRIGUEZ ALVAR Nieves
 2
 Nombre de cours : 2
 &
+MACRON Emmanuel
+1
+Nombre de cours : 2
+&
+TRUMP Donald
+3
+Nombre de cours : 1
+&

@@ -21,3 +21,8 @@ INF103
 INF104
 66
 &
+TRUMP Donald
+3
+INF000
+0
+&

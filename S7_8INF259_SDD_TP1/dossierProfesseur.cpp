@@ -94,30 +94,36 @@ DossierProfesseur::~DossierProfesseur() {
 //Méthode pour supprimer un professeur du dossier
 void DossierProfesseur::Supprimer(char* nom) {
 	//déclaration d'un pointeur temporaire afin de parcourir la liste sans perdre ni modifier la tete
-	Professeur** pointeurProfesseur = &tete;
+	Professeur* pointeurProfesseur = tete->suivant;
 	//déclaration d'un pointeur pour gerder en mémoire la position précédente. Au départ il s'agit de la tete
-	Professeur** pointeurPrecedent = &tete;
-
-	if ((*pointeurProfesseur) && (*pointeurPrecedent))
+	Professeur* pointeurPrecedent = tete;
+	if (pointeurProfesseur && pointeurPrecedent)
 	{
-		while ((*pointeurProfesseur) != NULL && strcmp((*pointeurProfesseur)->nom, nom) == 1)
+		while (pointeurProfesseur != NULL)
 		{
+			if (strcmp(pointeurPrecedent->nom, nom) == 0)
+			{
+				tete = pointeurProfesseur;
+				delete pointeurPrecedent;
+				cout << "Suppression de l'element ok. En tete." << endl;
+			}
+			else if (strcmp(pointeurProfesseur->nom, nom) == 0 && pointeurProfesseur->suivant != NULL)
+			{
+				pointeurPrecedent->suivant = pointeurProfesseur->suivant;
+				delete pointeurProfesseur;
+				cout << "Suppression de l'element ok. Ni en tete ni en queue." << endl;
+				break;
+			}
+			else if (strcmp(pointeurProfesseur->nom, nom) == 0 && pointeurProfesseur->suivant == NULL)
+			{
+				pointeurPrecedent->suivant = NULL;
+				delete pointeurProfesseur;
+				cout << "Suppression de l'element ok. En queue." << endl;
+				break;
+			}
 			pointeurPrecedent = pointeurProfesseur;
-			pointeurProfesseur = &(*pointeurProfesseur)->suivant;
+			pointeurProfesseur = pointeurProfesseur->suivant;
 		}
-		if (strcmp((*pointeurProfesseur)->nom, nom) == 0 && (*pointeurProfesseur)->suivant != NULL)
-		{
-			(*pointeurPrecedent)->suivant = (*pointeurProfesseur)->suivant;
-			delete (*pointeurProfesseur);
-			cout << "Suppression ok. Pas en queue." << endl;
-		}
-		else if (strcmp((*pointeurProfesseur)->nom, nom) == 0 && (*pointeurProfesseur)->suivant == NULL)
-		{
-			(*pointeurPrecedent)->suivant = NULL;
-			delete (*pointeurProfesseur);
-			cout << "Suppression ok. En queue." << endl;
-		}
-		else cout << "Le professeur n'apparait pas dans la liste. Nous n'avons pas effectuer sa suppression." << endl;
 	}
 }
 
