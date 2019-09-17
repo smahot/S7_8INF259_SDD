@@ -1,7 +1,7 @@
 #include "dossierProfesseur.h"
 using namespace std;
 
-//constructeur
+//Constructeur
 DossierProfesseur::DossierProfesseur(char* FP){
 	//déclaration et ouverture du fichier
 	ifstream entree;
@@ -13,8 +13,6 @@ DossierProfesseur::DossierProfesseur(char* FP){
 	else
 	{
 		string ligne;
-
-		this->tete = NULL;
 		//pointeur vers l'adresse du pointeur vers le professeur
 		Professeur** pointeurProfesseur = &tete;
 
@@ -63,7 +61,7 @@ DossierProfesseur::DossierProfesseur(char* FP){
 	entree.close();
 }
 
-//destructeur
+//Destructeur
 DossierProfesseur::~DossierProfesseur() {
 	Professeur* pointeurProfesseur = tete;
 
@@ -100,34 +98,52 @@ void DossierProfesseur::Supprimer(char* nom) {
 	//déclaration d'un pointeur pour gerder en mémoire la position précédente. Au départ il s'agit de la tete
 	Professeur** pointeurPrecedent = &tete;
 
-	(*pointeurProfesseur) = (Professeur*)malloc(sizeof(Professeur));
-	(*pointeurPrecedent) = (Professeur*)malloc(sizeof(Professeur));
-
 	if ((*pointeurProfesseur) && (*pointeurPrecedent))
 	{
-		while ((*pointeurProfesseur) != NULL && (*pointeurProfesseur)->nom != nom)
+		while ((*pointeurProfesseur) != NULL && strcmp((*pointeurProfesseur)->nom, nom) == 1)
 		{
-			(*pointeurPrecedent) = (*pointeurProfesseur);
-			(*pointeurProfesseur) = (*pointeurProfesseur)->suivant;
+			pointeurPrecedent = pointeurProfesseur;
+			pointeurProfesseur = &(*pointeurProfesseur)->suivant;
 		}
-		if ((*pointeurProfesseur)->nom == nom && (*pointeurProfesseur)->suivant != NULL)
+		if (strcmp((*pointeurProfesseur)->nom, nom) == 0 && (*pointeurProfesseur)->suivant != NULL)
 		{
 			(*pointeurPrecedent)->suivant = (*pointeurProfesseur)->suivant;
 			delete (*pointeurProfesseur);
-			cout << "Suppression ok. Pas en queue.";
+			cout << "Suppression ok. Pas en queue." << endl;
 		}
-		else if ((*pointeurProfesseur)->nom == nom && (*pointeurProfesseur)->suivant == NULL)
+		else if (strcmp((*pointeurProfesseur)->nom, nom) == 0 && (*pointeurProfesseur)->suivant == NULL)
 		{
 			(*pointeurPrecedent)->suivant = NULL;
 			delete (*pointeurProfesseur);
-			cout << "Suppression ok. En queue.";
+			cout << "Suppression ok. En queue." << endl;
 		}
 		else cout << "Le professeur n'apparait pas dans la liste. Nous n'avons pas effectuer sa suppression." << endl;
 	}
 }
 
+//Méthode qui compte le nombre d ecours commun entre deux profs.
 int DossierProfesseur::Commun(char* X, char* Y) {
-	return -1;
+	int nombreCoursCommun = 0;
+	Professeur* pointeurProfesseur = tete;
+	Cours* listeCoursProfX = NULL;
+	Cours* listeCoursProfY = NULL;
+	while (pointeurProfesseur != NULL)
+	{
+		if (strcmp(pointeurProfesseur->nom, X) == 0) listeCoursProfX = pointeurProfesseur->listeCours;
+		if (strcmp(pointeurProfesseur->nom, Y) == 0) listeCoursProfY = pointeurProfesseur->listeCours;
+		pointeurProfesseur = pointeurProfesseur->suivant;
+	}
+	while (listeCoursProfX != NULL)
+	{
+		Cours* copieListeProfY = listeCoursProfY;
+		while (copieListeProfY != NULL)
+		{
+			if (strcmp(listeCoursProfX->sigle, copieListeProfY->sigle) == 0) nombreCoursCommun++;
+			copieListeProfY = copieListeProfY->suivant;
+		}
+		listeCoursProfX = listeCoursProfX->suivant;
+	}
+	return nombreCoursCommun;
 }
 
 /*
@@ -184,6 +200,7 @@ char* DossierProfesseur::ProfeseurLeplusAncien() const {
 	return profLePlusAge->nom;
 }
 
+//Recopie à partir de la liste chaînée le nom, ancienneté et le nombre de cours demandés pour chaque professeur dans le fichier texte Nouveau.
 void DossierProfesseur::Recopier(char* Nouveau) {
 	Professeur* pointeurProfesseur = tete;
 	ofstream fichierSortie(Nouveau, ios::out | ios::trunc);
@@ -193,14 +210,17 @@ void DossierProfesseur::Recopier(char* Nouveau) {
 		{
 			fichierSortie << pointeurProfesseur->nom << endl;
 			fichierSortie << pointeurProfesseur->anciennete << endl;
-
 			Cours* pointeurCours = pointeurProfesseur->listeCours;
+			int compteur = 0;
 			while (pointeurCours != NULL)
 			{
-				fichierSortie << pointeurCours->sigle << endl;
-				fichierSortie << pointeurCours->nbEtudiants << endl;
+				compteur++;
+				//il rentre jamais dans cette boucle
+				//fichierSortie << pointeurCours->sigle << endl;
+				//fichierSortie << pointeurCours->nbEtudiants << endl;
 				pointeurCours = pointeurCours->suivant;
 			}
+			fichierSortie << "Nombre de cours : " << compteur << endl;
 			fichierSortie << "&" << endl;
 			pointeurProfesseur = pointeurProfesseur->suivant;
 		}
@@ -209,19 +229,21 @@ void DossierProfesseur::Recopier(char* Nouveau) {
 	else cout << "Erreur à l'ouverture !" << endl;
 }
 
+//Affiche la liste chaînée
 void DossierProfesseur::afficherListe(){
-	Professeur* temp = tete;
+	Professeur* pointeurProfesseur = tete;
 	if (tete == NULL) cout << "Liste NULL  ." << endl;
-	while (temp != NULL)
+	while (pointeurProfesseur != NULL)
 	{
-		cout << "nom : " << temp->nom << endl;
-		cout << "anciennete : " << temp->anciennete << endl;
-		while (temp->listeCours != NULL)
+		cout << "nom : " << pointeurProfesseur->nom << endl;
+		cout << "anciennete : " << pointeurProfesseur->anciennete << endl;
+		Cours* pointeurCours = pointeurProfesseur->listeCours;
+		while (pointeurCours != NULL)
 		{
-			cout << "Nom cours : " << temp->listeCours->sigle << endl;
-			cout << "Nb etudiants : " << temp->listeCours->nbEtudiants << endl;
-			temp->listeCours = temp->listeCours->suivant;
+			cout << "Nom cours : " << pointeurProfesseur->listeCours->sigle << endl;
+			cout << "Nb etudiants : " << pointeurProfesseur->listeCours->nbEtudiants << endl;
+			pointeurCours = pointeurCours->suivant;
 		}
-		temp = temp->suivant;
+		pointeurProfesseur = pointeurProfesseur->suivant;
 	}
 }

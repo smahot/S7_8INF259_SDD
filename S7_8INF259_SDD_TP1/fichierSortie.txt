@@ -1,9 +1,8 @@
 MAHOT Steve
 3
+Nombre de cours : 3
 &
 RODRIGUEZ ALVAR Nieves
 2
-&
-MACRON Emmanuel
-1
+Nombre de cours : 2
 &
