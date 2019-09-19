@@ -4,14 +4,14 @@
 #include "dossierProfesseur.h"
 using namespace std;
 
-//passage par référence du dossier prof
+//passage par rÃ©fÃ©rence du dossier prof
 void TraitementDossierProf(DossierProfesseur &dossierProf, string nomFichierTransaction)
 {
 	ifstream fichierTransaction(nomFichierTransaction);  //Ouverture d'un fichier en lecture
 
 	if (!fichierTransaction)
 	{
-		cout << "Le fichier transaction n'a pas pû être ouvert." << endl;
+		cout << "Le fichier transaction n'a pas pÃ» Ãªtre ouvert." << endl;
 	}
 	else
 	{
@@ -33,7 +33,7 @@ void TraitementDossierProf(DossierProfesseur &dossierProf, string nomFichierTran
 			}
 			else if (entree == "+")
 			{
-				cout << endl << "OP cours le plus demandé : "<< dossierProf.LecoursLeplusDemande() << endl;
+				cout << endl << "OP cours le plus demandÃ© : "<< dossierProf.LecoursLeplusDemande() << endl;
 			}
 			else if (entree == "*")
 			{
