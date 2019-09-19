@@ -127,7 +127,7 @@ void DossierProfesseur::Supprimer(char* nom) {
 	}
 }
 
-//Méthode qui compte le nombre d ecours commun entre deux profs.
+//Méthode qui compte le nombre de cours commun entre deux profs.
 int DossierProfesseur::Commun(char* X, char* Y) {
 	int nombreCoursCommun = 0;
 	Professeur* pointeurProfesseur = tete;
