@@ -1,12 +1,12 @@
 MAHOT_Steve
 3
-Nombre de cours : 3
+3
 &
 RODRIGUEZ_ALVAR_Nieves
 2
-Nombre de cours : 2
+2
 &
 MACRON_Emmanuel
 1
-Nombre de cours : 2
+2
 &

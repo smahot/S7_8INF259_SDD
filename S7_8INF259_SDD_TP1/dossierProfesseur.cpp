@@ -105,20 +105,20 @@ void DossierProfesseur::Supprimer(char* nom) {
 			{
 				tete = pointeurProfesseur;
 				delete pointeurPrecedent;
-				cout << "Suppression de l'element ok. En tete." << endl;
+				//cout << "Suppression de l'element ok. En tete." << endl;
 			}
 			else if (strcmp(pointeurProfesseur->nom, nom) == 0 && pointeurProfesseur->suivant != NULL)
 			{
 				pointeurPrecedent->suivant = pointeurProfesseur->suivant;
 				delete pointeurProfesseur;
-				cout << "Suppression de l'element ok. Ni en tete ni en queue." << endl;
+				//cout << "Suppression de l'element ok. Ni en tete ni en queue." << endl;
 				break;
 			}
 			else if (strcmp(pointeurProfesseur->nom, nom) == 0 && pointeurProfesseur->suivant == NULL)
 			{
 				pointeurPrecedent->suivant = NULL;
 				delete pointeurProfesseur;
-				cout << "Suppression de l'element ok. En queue." << endl;
+				//cout << "Suppression de l'element ok. En queue." << endl;
 				break;
 			}
 			pointeurPrecedent = pointeurProfesseur;
@@ -226,7 +226,8 @@ void DossierProfesseur::Recopier(char* Nouveau) {
 				//fichierSortie << pointeurCours->nbEtudiants << endl;
 				pointeurCours = pointeurCours->suivant;
 			}
-			fichierSortie << "Nombre de cours : " << compteur << endl;
+			//fichierSortie << "Nombre de cours : " << compteur << endl;
+			fichierSortie << compteur << endl;
 			fichierSortie << "&" << endl;
 			pointeurProfesseur = pointeurProfesseur->suivant;
 		}

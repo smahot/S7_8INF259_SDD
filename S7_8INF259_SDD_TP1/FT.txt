@@ -1,7 +1,5 @@
-#
 & MAHOT_Steve RODRIGUEZ_ALVAR_Nieves
 % TRUMP_Donald
-#
 +
 *
-$ fichierSortie.txt
+$ NOUVEAU.txt

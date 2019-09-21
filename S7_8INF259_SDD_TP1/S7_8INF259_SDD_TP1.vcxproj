@@ -105,8 +105,9 @@
     <ClInclude Include="dossierProfesseur.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="dossier.txt" />
-    <Text Include="fichierSortie.txt" />
+    <Text Include="FP.txt" />
+    <Text Include="FT.txt" />
+    <Text Include="NOUVEAU.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
