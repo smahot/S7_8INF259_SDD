@@ -16,5 +16,7 @@ public:
 	void transformerEnNombres(vector <char> tableau); // transforme les nombres lus en caractères en valeurs numériques
 	void transformerEnPrefixe(stack<char> Pile, vector<char> tableau);// transforme l’expression lue en une expression préfixée et l’afficher.
 	int evaluer_expression(stack<char> Pile, vector<char> tableau); // évalue l’expression préfixée et affiche sa valeur.
+	stack<char> GetPile();
+	vector<char> GetTableau();
 
 };
