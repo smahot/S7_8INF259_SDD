@@ -11,12 +11,14 @@ private:
 public:
 	Prefix(string str);
 	~Prefix();
-	bool prefixe(vector<char> tableau);// lit l’expression à évaluer, à partir du clavier, dans tableau et valide si l’expression ne contient que les caractères ci - dessus, à savoir les nombres entiers composés de caractères nombres et les opérateurs ci - dessus.
-	bool valider_expression(vector<char> tableau); // (bonus) teste si l’expression lue contient un nombre valide de parenthèses
-	void transformerEnNombres(vector <char> tableau); // transforme les nombres lus en caractères en valeurs numériques
-	void transformerEnPrefixe(stack<char> Pile, vector<char> tableau);// transforme l’expression lue en une expression préfixée et l’afficher.
-	int evaluer_expression(stack<char> Pile, vector<char> tableau); // évalue l’expression préfixée et affiche sa valeur.
+	bool prefixe(vector<char> tableau);// lit lâ€™expression Ã  Ã©valuer, Ã  partir du clavier, dans tableau et valide si lâ€™expression ne contient que les caractÃ¨res ci - dessus, Ã  savoir les nombres entiers composÃ©s de caractÃ¨res nombres et les opÃ©rateurs ci - dessus.
+	bool valider_expression(vector<char> tableau); // (bonus) teste si lâ€™expression lue contient un nombre valide de parenthÃ¨ses
+	void transformerEnNombres(vector <char> tableau); // transforme les nombres lus en caractÃ¨res en valeurs numÃ©riques
+	//https://en.wikipedia.org/wiki/Shunting-yard_algorithm adaptÃ© pour le prÃ©fixe
+	void transformerEnPrefixe(stack<char> Pile, vector<char> tableau);// transforme lâ€™expression lue en une expression prÃ©fixÃ©e et lâ€™afficher.
+	int evaluer_expression(stack<char> Pile, vector<char> tableau); // Ã©value lâ€™expression prÃ©fixÃ©e et affiche sa valeur.
 	stack<char> GetPile();
 	vector<char> GetTableau();
-
 };
+
+int prioriteOperateur(char operateur);
