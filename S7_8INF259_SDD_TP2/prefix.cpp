@@ -30,6 +30,15 @@ bool Prefix::prefixe(vector<char> tableau)
 bool Prefix::valider_expression(vector<char> tableau)
 {
 	bool result = false;
+	int nbParenthesesOuvrantes = 0;
+	int nbParenthesesFermantes = 0;
+
+	for (vector<char>::iterator i = tableau.begin(); i != tableau.end(); i++)
+	{
+		if ((*i) == '(') nbParenthesesOuvrantes++;
+		else if ((*i) == ')') nbParenthesesFermantes++;
+	}
+	if (nbParenthesesOuvrantes == nbParenthesesFermantes) result = true;
 	return result;
 }
 

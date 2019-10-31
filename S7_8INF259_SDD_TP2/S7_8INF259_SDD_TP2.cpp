@@ -12,7 +12,8 @@ int main()
 	std::vector<char> vect(expression.begin(), expression.end());
 	Prefix p = Prefix(expression);
 	
-	cout << p.prefixe(vect) << endl;
+	cout << p.valider_expression(vect) << endl;
+	cout << p.prefixe(vect) << endl;	
 		
 	std::cout << "fin programme" << endl;
 }
