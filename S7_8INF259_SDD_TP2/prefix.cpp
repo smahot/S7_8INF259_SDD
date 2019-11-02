@@ -135,7 +135,7 @@ int Prefix::evaluer_expression(stack<char> pile, vector<char> tableau)
 {
 	int result = 0;
 	stack<int> nombres;
-	for (vector<char>::iterator i = tableau.end(); i != tableau.begin(); i--)
+	for (vector<char>::iterator i = --(tableau.end()); i != tableau.begin(); i--)
 	{
 		
 		if (*i == '/')
