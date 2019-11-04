@@ -8,16 +8,39 @@ int main()
 {
 	//SetConsoleOutputCP(CP_UTF8);
 
-	//string expression = "(5+8)/(2-3)";
-	//string expression = "5+(8/2)*3";
-	string expression = "(3*4/2)/((8/2)-(6/3))";
-	std::vector<char> vect(expression.begin(), expression.end());
+	cout << "TP2 de Structures de donnees" << endl;
+	cout << "Fait par :" << endl << "- Steve MAHOT" << endl << "- Nieves RODRIGUEZ ALVAR" << endl;
+
+	string expression;
+	cout << "Entrez une expression infixe. " << endl
+		 << "Les divisions doivent etre entieres, les nombres ne sont pas pris en charge et ne mettez pas d'espaces." << endl
+		 << "Exemple: (3*4/2)/((8/2)-(6/3))" << endl;
+
+	cin >> expression;
+	//expression = (3*4/2)/((8/2)-(6/3));
+
+	//création de l'objet prefix
 	Prefix p = Prefix(expression);
-	p.transformerEnPrefixe(p.GetPile(), p.GetTableau());
-	
-	cout << p.valider_expression(vect) << endl;
-	cout << p.prefixe(vect) << endl;	
-	cout << p.evaluer_expression(p.GetPile(), p.GetTableau());
+
+	//conversion en préfixe
+	bool valide1 = p.prefixe(p.GetTableau());
+	bool valide2 = p.valider_expression(p.GetTableau());
+
+	cout << "Expression avec des caracteres valides ? '0123456789+-/*()' 0:Vrai, 1:Faux : " << valide1 << endl;
+	cout << "Expression valide ? (Autant de '(' que de ')' 0:Vrai, 1:Faux               : " << valide2 << endl;
+
+	if (valide1 && valide2)
+	{
+		cout << "Expression prefixe                                                         : ";
+		p.transformerEnPrefixe(p.GetPile(), p.GetTableau());
+		cout << "Calcul de l'expression prefixe (division d'int sans reste)                 : "
+			 << p.evaluer_expression(p.GetPile(), p.GetTableau()) << endl;
+	}
+	else
+	{
+		cout << "Expression non valide, relancez le programme." << endl;
+	}
 		
-	std::cout << "fin programme" << endl;
+	std::cout << "Fin du programme" << endl;
+	system("pause");
 }

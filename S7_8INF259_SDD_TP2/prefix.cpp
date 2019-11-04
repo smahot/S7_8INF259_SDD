@@ -8,8 +8,9 @@ Prefix::Prefix(string str)
 
 Prefix::~Prefix()
 {
-
+	//pas de pointeurs à supprimer
 }
+
 bool Prefix::prefixe(vector<char> tableau)
 {
 	bool result = true;
@@ -135,46 +136,52 @@ int Prefix::evaluer_expression(stack<char> pile, vector<char> tableau)
 {
 	int result = 0;
 	stack<int> nombres;
-	for (vector<char>::iterator i = --(tableau.end()); i != tableau.begin(); i--)
+
+	//convertit la stack en vector
+	char* end = &pile.top() + 1;
+	char* begin = end - pile.size();
+	std::vector<char> expression_prefixe(begin, end);
+
+	for (vector<char>::reverse_iterator i = expression_prefixe.rbegin(); i != expression_prefixe.rend(); i++)
 	{
 		
 		if (*i == '/')
 		{
-			int b = nombres.top();
-			nombres.pop();
 			int a = nombres.top();
+			nombres.pop();
+			int b = nombres.top();
 			nombres.pop();
 			nombres.push(a / b);
 		}
 		else if (*i == '*')
 		{
-			int b = nombres.top();
-			nombres.pop();
 			int a = nombres.top();
+			nombres.pop();
+			int b = nombres.top();
 			nombres.pop();
 			nombres.push(a * b);
 		}
 		else if (*i == '+')
 		{
-			int b = nombres.top();
-			nombres.pop();
 			int a = nombres.top();
+			nombres.pop();
+			int b = nombres.top();
 			nombres.pop();
 			nombres.push(a + b);
 		}
 		else if (*i == '-')
 		{
-			int b = nombres.top();
-			nombres.pop();
 			int a = nombres.top();
+			nombres.pop();
+			int b = nombres.top();
 			nombres.pop();
 			nombres.push(a - b);
 		}
 		else if (*i == '%')
 		{
-			int b = nombres.top();
-			nombres.pop();
 			int a = nombres.top();
+			nombres.pop();
+			int b = nombres.top();
 			nombres.pop();
 			nombres.push(a % b);
 		}
@@ -185,6 +192,8 @@ int Prefix::evaluer_expression(stack<char> pile, vector<char> tableau)
 		}
 		
 	}
+
+	delete begin, end;
 	result = nombres.top();
 	return result;
 }

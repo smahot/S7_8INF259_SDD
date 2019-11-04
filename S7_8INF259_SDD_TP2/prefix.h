@@ -6,8 +6,8 @@ using namespace std;
 class Prefix
 {
 private:
-	std::stack<char> pile;
-	std::vector<char> tableau;
+	std::stack<char> pile; // notation préfixe de l'expression
+	std::vector<char> tableau; // notation infixe de l'expression
 public:
 	Prefix(string str);
 	~Prefix();
@@ -21,4 +21,4 @@ public:
 	vector<char> GetTableau();
 };
 
-int prioriteOperateur(char operateur);
+int prioriteOperateur(char operateur); // renvoie la priorité de l'opérateur
