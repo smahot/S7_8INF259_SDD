@@ -26,7 +26,7 @@ int main()
 	bool valide1 = p.prefixe(p.GetTableau());
 	bool valide2 = p.valider_expression(p.GetTableau());
 
-	cout << "Expression avec des caracteres valides ? '0123456789+-/*()' 0:Vrai, 1:Faux : " << valide1 << endl;
+	cout << "Expression avec des caracteres valides ? '0123456789+-/*%()' 0:Vrai, 1:Faux : " << valide1 << endl;
 	cout << "Expression valide ? (Autant de '(' que de ')' 0:Vrai, 1:Faux               : " << valide2 << endl;
 
 	if (valide1 && valide2)

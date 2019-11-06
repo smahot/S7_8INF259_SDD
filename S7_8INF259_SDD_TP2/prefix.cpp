@@ -14,7 +14,7 @@ Prefix::~Prefix()
 bool Prefix::prefixe(vector<char> tableau)
 {
 	bool result = true;
-	char listeCaracteresAutorises[] = "0123456789+-/*()";
+	char listeCaracteresAutorises[] = "0123456789+-/*%()";
 	bool caractereEstValide = true;
 
 	for (vector<char>::iterator i = tableau.begin(); i != tableau.end() && caractereEstValide; i++)
@@ -193,7 +193,6 @@ int Prefix::evaluer_expression(stack<char> pile, vector<char> tableau)
 		
 	}
 
-	delete begin, end;
 	result = nombres.top();
 	return result;
 }
