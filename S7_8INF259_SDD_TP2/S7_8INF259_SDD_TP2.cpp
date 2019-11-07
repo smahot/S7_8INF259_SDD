@@ -13,7 +13,7 @@ int main()
 
 	string expression;
 	cout << "Entrez une expression infixe. " << endl
-		 << "Les divisions sont entières, les nombres ne sont pas pris en charge et ne mettez pas d'espaces." << endl
+		 << "Les divisions sont entieres, les nombres ne sont pas pris en charge et ne mettez pas d'espaces." << endl
 		 << "Exemple: (3*4/2)/((8/2)-(8%3))" << endl;
 
 	cin >> expression;
@@ -26,14 +26,14 @@ int main()
 	bool valide1 = p.prefixe(p.GetTableau());
 	bool valide2 = p.valider_expression(p.GetTableau());
 
-	cout << "Expression avec des caracteres valides ? '0123456789+-/*%()' 0:Vrai, 1:Faux : " << valide1 << endl;
-	cout << "Expression valide ? (Autant de '(' que de ')' 0:Vrai, 1:Faux                : " << valide2 << endl;
+	cout << "Expression avec des caracteres valides ? '0123456789+-/*%()' 0:Faux, 1:Vrai : " << valide1 << endl;
+	cout << "Expression valide ? (Autant de '(' que de ')' 0:Faux, 1:Vrai                : " << valide2 << endl;
 
 	if (valide1 && valide2)
 	{
 		cout << "Expression prefixe                                                          : ";
 		p.transformerEnPrefixe(p.GetPile(), p.GetTableau());
-		cout << "Résultat de l'expression prefixe (division d'int sans reste)                : "
+		cout << "Resultat de l'expression prefixe (division d'int sans reste)                : "
 			 << p.evaluer_expression(p.GetPile(), p.GetTableau()) << endl;
 	}
 	else
