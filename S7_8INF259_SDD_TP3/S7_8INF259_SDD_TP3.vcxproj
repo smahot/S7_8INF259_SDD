@@ -151,7 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bst.cpp" />
     <ClCompile Include="S7_8INF259_SDD_TP3.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bst.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

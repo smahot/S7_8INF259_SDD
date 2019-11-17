@@ -3,5 +3,6 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	BST arbre = BST(10);
+	arbre.Insert(arbre.GetRootNode(), 5);
 }
