@@ -1,4 +1,7 @@
 #include <stdbool.h>
+#include <vector>
+
+using namespace std;
 
 typedef struct node {	
 	int data;
@@ -12,7 +15,9 @@ private:
 public:
 	BST(int d); // Construit l’arbre dont la racine contient la donnée d.
 	~BST(); // Désalloue l’espace mémoire occupé par l’arbre.
-	void Insert(node* root, int d); // Insérer l’élément de valeur d dans l’arbre.
+	void Insert(int d); // Insérer l’élément de valeur d dans l’arbre à partir de la racine.
+	void Insert(vector<int> vect); // Insérer l’élément de valeur d dans l’arbre à partir de la racine.
+	void _Insert(node* root, int d); // Insérer l’élément de valeur d dans l’arbre.
 	void Delete(node* root, int d); // Supprime l’élément de valeur d de l’arbre.
 	void Imprimer_decroissant(node* root); //Affiche les éléments de l’arbre dans l’ordre décroissant.
 	int Print_height(node* root); //Affiche la hauteur de l’arbre et par la même occasion l’équilibre ou le déséquilibre de chaque noeud.
@@ -20,6 +25,7 @@ public:
 	void Print_childrens(node* root, int d); //Affiche les descendants de l’élément de valeur d.
 	void Niveau(node* root); // afficher niveau par niveau les éléments de l’arbre.
 	node* GetRootNode(); // Retourne le noeud root
+	node* GetParentNode(int d, node* pNode); // Retourne le noeud parent
 };
 
 bool estFeuille(node* noeud);

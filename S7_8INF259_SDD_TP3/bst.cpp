@@ -1,5 +1,9 @@
 #include "BST.h"
 #include <stdlib.h>
+#include <iostream>
+
+
+using namespace std;
 
 BST::BST(int d)
 {
@@ -12,7 +16,19 @@ BST::~BST()
 {
 
 }
-void BST::Insert(node* root, int d)
+void BST::Insert(int d)
+{
+	_Insert(this->GetRootNode(), d);
+}
+void BST::Insert(vector<int> vect)
+{
+	for (int i : vect)
+	{
+		std::cout << i << endl;
+		_Insert(this->GetRootNode(), i);
+	}
+}
+void BST::_Insert(node* root, int d)
 {
 	if (root != NULL)
 	{
@@ -28,7 +44,7 @@ void BST::Insert(node* root, int d)
 			}
 			else
 			{
-				Insert(root->gauche, d);
+				_Insert(root->gauche, d);
 			}
 		}
 		else
@@ -43,7 +59,7 @@ void BST::Insert(node* root, int d)
 			}
 			else
 			{
-				Insert(root->droite, d);
+				_Insert(root->droite, d);
 			}
 		}
 	}
@@ -90,4 +106,31 @@ bool estFeuille(node* noeud)
 		}
 	}
 	return result;
+}
+
+node* BST::GetParentNode(int d, node* pNode)
+{
+	if (pNode != NULL)
+	{
+		if (pNode->data == d) return NULL;
+		else if (pNode->data < d)
+		{
+			if (pNode->gauche != NULL)
+			{
+				if (pNode->gauche->data == d) return pNode;
+				else return GetParentNode(d, pNode->gauche);
+			}
+			else return NULL;
+		}
+		else
+		{
+			if (pNode->droite != NULL)
+			{
+				if (pNode->droite->data == d) return pNode;
+				else return GetParentNode(d, pNode->droite);
+			}
+			else return NULL;
+		}
+	}
+	return NULL;
 }
