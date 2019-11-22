@@ -14,5 +14,8 @@ int main()
 	arbre.affichage_infixe();
 	//arbre.affichage_arborescence_infixe();
 
+	arbre.Print_childrens(11);
+	arbre.Niveau();
+
 	std::cout << "Fin programme" << endl;
 }

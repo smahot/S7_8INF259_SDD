@@ -23,8 +23,8 @@ public:
 	void Imprimer_decroissant(node* root); //Affiche les éléments de l’arbre dans l’ordre décroissant.
 	int Print_height(node* root); //Affiche la hauteur de l’arbre et par la même occasion l’équilibre ou le déséquilibre de chaque noeud.
 	void Print_ancetres(node* root, int d); //Affiche les ascendants de l’élément de valeur d. (bonus 15pts)
-	void Print_childrens(node* root, int d); //Affiche les descendants de l’élément de valeur d.
-	void Niveau(node* root); // afficher niveau par niveau les éléments de l’arbre.
+	void Print_childrens(int d); //Affiche les descendants de l’élément de valeur d.
+	void Niveau(); // afficher niveau par niveau les éléments de l’arbre.
 	node* GetRootNode(); // Retourne le noeud root
 	node* GetParentNode(int d); // Retourne le noeud parent
 	node* _GetParentNode(int d, node* pNode); // Retourne le noeud parent

@@ -112,13 +112,13 @@ void BST::Print_ancetres(node* root, int d)
 {
 
 }
-void BST::Print_childrens(node* root, int d)
+void BST::Print_childrens(int d)
 {
-
+	_affichage_infixe(this->GetNode(d));
 }
-void BST::Niveau(node* root)
+void BST::Niveau()
 {
-
+	affichage_arborescence();
 }
 
 node* BST::GetRootNode()
