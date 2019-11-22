@@ -209,3 +209,90 @@ void BST::_affichage_infixe(node* root)
 		if (root->droite != NULL) _affichage_infixe(root->droite);
 	}
 }
+
+void afficher_offset(int offset)
+{
+	for (int i = 0; i < offset; i++)
+	{
+		printf("  "); // 2 espaces
+	}
+}
+
+void BST::_affichage_arborescence(node* arbre, int offset)
+{
+	if (arbre != NULL)
+	{
+		// Etape 1 - afficher la valeur
+		printf("\n");
+		afficher_offset(offset);
+		if (offset != 0)
+		{
+			printf("|- ");
+		}
+		printf("%d", arbre->data);
+
+		// Etape 2 - appel récursif avec sous-arbre gauche
+		/*if (!estFeuille(arbre) && arbre->gauche == NULL)
+		{
+			printf("\n");
+			afficher_offset(offset + 1);
+			printf("|- x");
+		}*/
+		_affichage_arborescence(arbre->gauche, offset + 1);
+
+
+		// Etape 3 - appel récursif avec sous-arbre de droite
+		/*if (!estFeuille(arbre) && arbre->droite == NULL)
+		{
+			printf("\n");
+			afficher_offset(offset + 1);
+			printf("|- x");
+		}*/
+		_affichage_arborescence(arbre->droite, offset + 1);
+	}
+}
+
+void BST::_affichage_arborescence_infixe(node* arbre, int offset)
+{
+	if (arbre != NULL)
+	{
+		// Etape 2 - appel récursif avec sous-arbre gauche
+		/*if (!estFeuille(arbre) && arbre->gauche == NULL)
+		{
+			printf("\n");
+			afficher_offset(offset + 1);
+			//printf("|- x");
+		}*/
+		_affichage_arborescence_infixe(arbre->gauche, offset + 1);
+
+		// Etape 1 - afficher la valeur
+		printf("\n");
+		afficher_offset(offset);
+		if (offset != 0)
+		{
+			printf("|- ");
+		}
+		printf("%d", arbre->data);
+
+		// Etape 3 - appel récursif avec sous-arbre de droite
+		/*if (!estFeuille(arbre) && arbre->droite == NULL)
+		{
+			printf("\n");
+			afficher_offset(offset + 1);
+			printf("|- x");
+		}*/
+		_affichage_arborescence_infixe(arbre->droite, offset + 1);
+	}
+}
+
+void BST::affichage_arborescence()
+{
+	_affichage_arborescence(this->GetRootNode(), 0);
+	cout << endl;
+}
+
+void BST::affichage_arborescence_infixe()
+{
+	_affichage_arborescence_infixe(this->GetRootNode(), 0);
+	cout << endl;
+}

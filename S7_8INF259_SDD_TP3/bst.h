@@ -33,6 +33,10 @@ public:
 	int maxValue(node* root);
 	void affichage_infixe();
 	void _affichage_infixe(node* root);
+	void _affichage_arborescence(node* arbre, int offset);
+	void _affichage_arborescence_infixe(node* arbre, int offset);
+	void affichage_arborescence();
+	void affichage_arborescence_infixe();
 };
 
 bool estFeuille(node* noeud);
