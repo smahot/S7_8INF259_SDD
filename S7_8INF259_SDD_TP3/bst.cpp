@@ -14,7 +14,7 @@ BST::BST(int d)
 }
 BST::~BST()
 {
-
+	delete this->root;
 }
 void BST::Insert(int d)
 {
