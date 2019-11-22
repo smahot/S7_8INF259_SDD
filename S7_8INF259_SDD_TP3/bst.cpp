@@ -24,7 +24,6 @@ void BST::Insert(vector<int> vect)
 {
 	for (int i : vect)
 	{
-		std::cout << i << endl;
 		_Insert(this->GetRootNode(), i);
 	}
 }
@@ -64,9 +63,41 @@ void BST::_Insert(node* root, int d)
 		}
 	}
 }
-void BST::Delete(node* root, int d)
+void BST::Delete(int d)
 {
-
+	this->root = _Delete(this->GetRootNode(), d);
+}
+node* BST::_Delete(node* pNode, int d)
+{
+	if (pNode == NULL) return NULL;
+	else
+	{
+		node* newNode;
+		if (d > pNode->data)
+		{
+			newNode = pNode;
+			newNode->droite = _Delete(pNode->droite, d);
+		}
+		else if (d < pNode->data)
+		{
+			newNode = pNode;
+			newNode->gauche = _Delete(pNode->gauche, d);
+		}
+		else // d == pNode->data
+		{
+			if (pNode->gauche == NULL && pNode->droite == NULL) newNode = NULL;
+			else if (pNode->gauche != NULL && pNode->droite == NULL) newNode = pNode->gauche;
+			else if (pNode->gauche == NULL && pNode->droite != NULL) newNode = pNode->droite;
+			else // (pNode->gauche != NULL && pNode->droite != NULL)
+			{
+				newNode = pNode;
+				int newValue = maxValue(pNode->gauche);
+				newNode->data = newValue;
+				newNode->gauche = _Delete(pNode->gauche, newValue);
+			}
+		}
+		return newNode;
+	}
 }
 void BST::Imprimer_decroissant(node* root)
 {
@@ -107,8 +138,11 @@ bool estFeuille(node* noeud)
 	}
 	return result;
 }
-
-node* BST::GetParentNode(int d, node* pNode)
+node* BST::GetParentNode(int d)
+{
+	return this->_GetParentNode(d, this->GetRootNode());
+}
+node* BST::_GetParentNode(int d, node* pNode)
 {
 	if (pNode != NULL)
 	{
@@ -118,7 +152,7 @@ node* BST::GetParentNode(int d, node* pNode)
 			if (pNode->gauche != NULL)
 			{
 				if (pNode->gauche->data == d) return pNode;
-				else return GetParentNode(d, pNode->gauche);
+				else return _GetParentNode(d, pNode->gauche);
 			}
 			else return NULL;
 		}
@@ -127,10 +161,51 @@ node* BST::GetParentNode(int d, node* pNode)
 			if (pNode->droite != NULL)
 			{
 				if (pNode->droite->data == d) return pNode;
-				else return GetParentNode(d, pNode->droite);
+				else return _GetParentNode(d, pNode->droite);
 			}
 			else return NULL;
 		}
 	}
 	return NULL;
+}
+node* BST::GetNode(int d)
+{
+	return this->_GetNode(d, this->GetRootNode());
+}
+
+node* BST::_GetNode(int d, node* pNode)
+{
+	if (pNode != NULL)
+	{
+		if (pNode->data == d) return pNode;
+		else if (d < pNode->data && pNode->gauche != NULL)
+		{
+			return this->_GetNode(d, pNode->gauche);
+		}
+		else if (d > pNode->data && pNode->droite != NULL)
+		{
+			return this->_GetNode(d, pNode->droite);
+		}
+		else return NULL;
+	}
+	else return NULL;
+}
+int BST::maxValue(node* root)
+{
+	if (root->droite != NULL) return maxValue(root->droite);
+	else return root->data;
+}
+void BST::affichage_infixe()
+{
+	_affichage_infixe(this->GetRootNode());
+	cout << endl;
+}
+void BST::_affichage_infixe(node* root)
+{
+	if (root != NULL)
+	{
+		if (root->gauche != NULL) _affichage_infixe(root->gauche);
+		cout << root->data << " ";
+		if (root->droite != NULL) _affichage_infixe(root->droite);
+	}
 }
