@@ -99,9 +99,10 @@ node* BST::_Delete(node* pNode, int d)
 		return newNode;
 	}
 }
-void BST::Imprimer_decroissant(node* root)
+void BST::Imprimer_decroissant()
 {
-
+	_affichage_decroissant(this->GetRootNode());
+	cout << endl;
 }
 int BST::Print_height(node* root)
 {
@@ -207,6 +208,16 @@ void BST::_affichage_infixe(node* root)
 		if (root->gauche != NULL) _affichage_infixe(root->gauche);
 		cout << root->data << " ";
 		if (root->droite != NULL) _affichage_infixe(root->droite);
+	}
+}
+
+void BST::_affichage_decroissant(node* root)
+{
+	if (root != NULL)
+	{
+		if (root->droite != NULL) _affichage_decroissant(root->droite);
+		cout << root->data << " ";
+		if (root->gauche != NULL) _affichage_decroissant(root->gauche);
 	}
 }
 

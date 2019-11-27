@@ -17,5 +17,7 @@ int main()
 	arbre.Print_childrens(11);
 	arbre.Niveau();
 
+	arbre.Imprimer_decroissant();
+
 	std::cout << "Fin programme" << endl;
 }
