@@ -186,7 +186,25 @@ void BST::Print_childrens(int d)
 }
 void BST::Niveau()
 {
-	affichage_arborescence();
+	int niveau = 0;
+	vector<node*> nodesList;
+	nodesList.push_back(this->GetRootNode());
+	while (nodesList.size() > 0)
+	{
+		cout << "Niveau " << niveau << ": ";
+		
+		vector<node*> newNodesList;
+		for (node* iNode : nodesList)
+		{
+			cout << iNode->data << " ";
+			if (iNode->gauche) newNodesList.push_back(iNode->gauche);
+			if (iNode->droite) newNodesList.push_back(iNode->droite);
+		}
+		cout << endl;
+		nodesList = newNodesList;
+		niveau++;
+	}
+
 }
 
 node* BST::GetRootNode()
