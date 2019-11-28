@@ -8,9 +8,13 @@ using namespace std;
 BST::BST(int d)
 {
 	this->root = (node*)malloc(sizeof(node));
-	this->root->data = d;
-	this->root->gauche = NULL;
-	this->root->droite = NULL;
+	if (this->root)
+	{
+		this->root->data = d;
+		this->root->gauche = NULL;
+		this->root->droite = NULL;
+	}
+	else cout << "Erreur, plus assez de memoire." << endl;
 }
 BST::~BST()
 {
@@ -36,10 +40,14 @@ void BST::_Insert(node* root, int d)
 			if (root->gauche == NULL)
 			{
 				node* newNode = (node*)malloc(sizeof(node));
-				newNode->gauche = NULL;
-				newNode->droite = NULL;
-				newNode->data = d;
-				root->gauche = newNode;
+				if (newNode)
+				{
+					newNode->gauche = NULL;
+					newNode->droite = NULL;
+					newNode->data = d;
+					root->gauche = newNode;
+				}
+				else cout << "Erreur, plus assez de memoire." << endl;
 			}
 			else
 			{
@@ -51,10 +59,14 @@ void BST::_Insert(node* root, int d)
 			if (root->droite == NULL)
 			{
 				node* newNode = (node*)malloc(sizeof(node));
-				newNode->gauche = NULL;
-				newNode->droite = NULL;
-				newNode->data = d;
-				root->droite = newNode;
+				if (newNode)
+				{
+					newNode->gauche = NULL;
+					newNode->droite = NULL;
+					newNode->data = d;
+					root->droite = newNode;
+				}
+				else cout << "Erreur, plus assez de memoire." << endl;
 			}
 			else
 			{
@@ -104,14 +116,69 @@ void BST::Imprimer_decroissant()
 	_affichage_decroissant(this->GetRootNode());
 	cout << endl;
 }
-int BST::Print_height(node* root)
+int BST::Print_height()
 {
-	
-	return 0;
+	return _Print_height(this->GetRootNode());
 }
-void BST::Print_ancetres(node* root, int d)
+int BST::_Print_height(node* root)
 {
+	cout << "Equilibre des noeud postfixe (valeur:equilibre) : ";
+	int hauteur = Hauteur(root);
+	cout << endl;
+	return hauteur;
+}
 
+int BST::Hauteur(node* root)
+{
+	int result = -1;
+	if (root!= NULL)
+	{		
+		int hauteur_gauche = Hauteur(root->gauche);
+		int hauteur_droite = Hauteur(root->droite);
+		int equilibre = hauteur_droite - hauteur_gauche;
+		cout << root->data << ":" << equilibre << " ";
+		if (hauteur_droite > hauteur_gauche) result = hauteur_droite;
+		else result = hauteur_gauche;
+		result++;
+	}	
+	return result;
+}
+void BST::Print_ancetres(int d)
+{
+	vector<int> ancetres;
+	this->_Print_ancetres(d, this->GetRootNode(), ancetres);
+
+	if (ancetres.size() > 1)
+	{
+		cout << "Les ancetres de " << d << " sont : " << endl;
+		for (int i : ancetres)
+		{
+			cout << i << " ";
+		}
+		cout << endl;
+	}
+	else if (ancetres.size() == 1) cout << "L'ancetre de " << d << " est : " << ancetres[0] << endl;
+	else cout << d << " n'a pas d'ancetres dans l'arbre" << endl;
+
+}
+node* BST::_Print_ancetres(int d, node* pNode, vector<int> &ancetres)
+{
+	if (pNode != NULL)
+	{
+		if (pNode->data == d) return pNode;
+		else if (d < pNode->data && pNode->gauche != NULL)
+		{
+			ancetres.push_back(pNode->data);
+			return this->_Print_ancetres(d, pNode->gauche, ancetres);
+		}
+		else if (d > pNode->data&& pNode->droite != NULL)
+		{
+			ancetres.push_back(pNode->data);
+			return this->_Print_ancetres(d, pNode->droite, ancetres);
+		}
+		else return NULL;
+	}
+	else return NULL;
 }
 void BST::Print_childrens(int d)
 {
@@ -127,18 +194,6 @@ node* BST::GetRootNode()
 	return this->root;
 }
 
-bool estFeuille(node* noeud)
-{
-	bool result = false;
-	if (noeud != NULL)
-	{
-		if (noeud->gauche != NULL || noeud->droite != NULL)
-		{
-			result = true;
-		}
-	}
-	return result;
-}
 node* BST::GetParentNode(int d)
 {
 	return this->_GetParentNode(d, this->GetRootNode());
@@ -225,7 +280,7 @@ void afficher_offset(int offset)
 {
 	for (int i = 0; i < offset; i++)
 	{
-		printf("  "); // 2 espaces
+		cout << "  "; // 2 espaces
 	}
 }
 
@@ -243,22 +298,10 @@ void BST::_affichage_arborescence(node* arbre, int offset)
 		printf("%d", arbre->data);
 
 		// Etape 2 - appel récursif avec sous-arbre gauche
-		/*if (!estFeuille(arbre) && arbre->gauche == NULL)
-		{
-			printf("\n");
-			afficher_offset(offset + 1);
-			printf("|- x");
-		}*/
 		_affichage_arborescence(arbre->gauche, offset + 1);
 
 
 		// Etape 3 - appel récursif avec sous-arbre de droite
-		/*if (!estFeuille(arbre) && arbre->droite == NULL)
-		{
-			printf("\n");
-			afficher_offset(offset + 1);
-			printf("|- x");
-		}*/
 		_affichage_arborescence(arbre->droite, offset + 1);
 	}
 }
@@ -268,12 +311,6 @@ void BST::_affichage_arborescence_infixe(node* arbre, int offset)
 	if (arbre != NULL)
 	{
 		// Etape 2 - appel récursif avec sous-arbre gauche
-		/*if (!estFeuille(arbre) && arbre->gauche == NULL)
-		{
-			printf("\n");
-			afficher_offset(offset + 1);
-			//printf("|- x");
-		}*/
 		_affichage_arborescence_infixe(arbre->gauche, offset + 1);
 
 		// Etape 1 - afficher la valeur
@@ -286,12 +323,6 @@ void BST::_affichage_arborescence_infixe(node* arbre, int offset)
 		printf("%d", arbre->data);
 
 		// Etape 3 - appel récursif avec sous-arbre de droite
-		/*if (!estFeuille(arbre) && arbre->droite == NULL)
-		{
-			printf("\n");
-			afficher_offset(offset + 1);
-			printf("|- x");
-		}*/
 		_affichage_arborescence_infixe(arbre->droite, offset + 1);
 	}
 }

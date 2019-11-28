@@ -21,8 +21,11 @@ public:
 	void Delete(int d); // Supprime l’élément de valeur d de l’arbre.
 	node* _Delete(node* root, int d); // Renvoie le noeud root sans la valeur d
 	void Imprimer_decroissant(); //Affiche les éléments de l’arbre dans l’ordre décroissant.
-	int Print_height(node* root); //Affiche la hauteur de l’arbre et par la même occasion l’équilibre ou le déséquilibre de chaque noeud.
-	void Print_ancetres(node* root, int d); //Affiche les ascendants de l’élément de valeur d. (bonus 15pts)
+	int Print_height(); //Affiche la hauteur de l’arbre et par la même occasion l’équilibre ou le déséquilibre de chaque noeud.
+	int _Print_height(node* root);
+	int Hauteur(node* root);
+	void Print_ancetres(int d); //Affiche les ascendants de l’élément de valeur d. (bonus 15pts)
+	node* _Print_ancetres(int d, node* pNode, vector<int> &ancetres);
 	void Print_childrens(int d); //Affiche les descendants de l’élément de valeur d.
 	void Niveau(); // afficher niveau par niveau les éléments de l’arbre.
 	node* GetRootNode(); // Retourne le noeud root

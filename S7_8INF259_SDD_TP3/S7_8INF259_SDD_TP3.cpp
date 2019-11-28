@@ -19,5 +19,9 @@ int main()
 
 	arbre.Imprimer_decroissant();
 
+	arbre.Print_ancetres(9);
+
+	cout << "Hauteur de l'arbre : " << arbre.Print_height();
+
 	std::cout << "Fin programme" << endl;
 }
