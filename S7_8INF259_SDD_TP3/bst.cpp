@@ -16,6 +16,10 @@ BST::BST(int d)
 	}
 	else cout << "Erreur, plus assez de memoire." << endl;
 }
+BST::BST()
+{
+	this->root = NULL;
+}
 BST::~BST()
 {
 	delete this->root;
@@ -73,6 +77,17 @@ void BST::_Insert(node* root, int d)
 				_Insert(root->droite, d);
 			}
 		}
+	}
+	else
+	{
+		this->root = (node*)malloc(sizeof(node));
+		if (this->root)
+		{
+			this->root->data = d;
+			this->root->gauche = NULL;
+			this->root->droite = NULL;
+		}
+		else cout << "Erreur, plus assez de memoire." << endl;
 	}
 }
 void BST::Delete(int d)
@@ -183,6 +198,7 @@ node* BST::_Print_ancetres(int d, node* pNode, vector<int> &ancetres)
 void BST::Print_childrens(int d)
 {
 	_affichage_infixe(this->GetNode(d));
+	cout << endl;
 }
 void BST::Niveau()
 {

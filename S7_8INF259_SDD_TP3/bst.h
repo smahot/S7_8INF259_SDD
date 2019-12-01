@@ -14,6 +14,7 @@ private:
 	node* root; // La racine de l’arbre BST
 public:
 	BST(int d); // Construit l’arbre dont la racine contient la donnée d.
+	BST();
 	~BST(); // Désalloue l’espace mémoire occupé par l’arbre.
 	void Insert(int d); // Insérer l’élément de valeur d dans l’arbre à partir de la racine.
 	void Insert(vector<int> vect); // Insérer l’élément de valeur d dans l’arbre à partir de la racine.
