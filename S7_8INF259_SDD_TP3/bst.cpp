@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <iostream>
 
-
 using namespace std;
 
 BST::BST(int d)
@@ -331,11 +330,11 @@ void BST::_affichage_arborescence(node* arbre, int offset)
 		}
 		printf("%d", arbre->data);
 
-		// Etape 2 - appel récursif avec sous-arbre gauche
+		// Etape 2 - appel rï¿½cursif avec sous-arbre gauche
 		_affichage_arborescence(arbre->gauche, offset + 1);
 
 
-		// Etape 3 - appel récursif avec sous-arbre de droite
+		// Etape 3 - appel rï¿½cursif avec sous-arbre de droite
 		_affichage_arborescence(arbre->droite, offset + 1);
 	}
 }
@@ -344,7 +343,7 @@ void BST::_affichage_arborescence_infixe(node* arbre, int offset)
 {
 	if (arbre != NULL)
 	{
-		// Etape 2 - appel récursif avec sous-arbre gauche
+		// Etape 2 - appel rï¿½cursif avec sous-arbre gauche
 		_affichage_arborescence_infixe(arbre->gauche, offset + 1);
 
 		// Etape 1 - afficher la valeur
@@ -356,7 +355,7 @@ void BST::_affichage_arborescence_infixe(node* arbre, int offset)
 		}
 		printf("%d", arbre->data);
 
-		// Etape 3 - appel récursif avec sous-arbre de droite
+		// Etape 3 - appel rï¿½cursif avec sous-arbre de droite
 		_affichage_arborescence_infixe(arbre->droite, offset + 1);
 	}
 }
