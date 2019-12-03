@@ -64,6 +64,7 @@ void ExecutionOperations(string fileName, BST arbre)
 			{
 				cout << "Instruction inconnue" << endl;
 			}
+			cout << endl;
 		}
 	}
 }
