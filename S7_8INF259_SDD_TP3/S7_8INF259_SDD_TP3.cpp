@@ -47,6 +47,8 @@ void ExecutionOperations(string fileName, BST arbre)
 			{
 				cout << entree << " : Afficher niveau par niveau les éléments de l’arbre" << endl;
 				arbre.Niveau();
+				cout << endl << "Affichage alternatif :";
+				arbre.affichage_arborescence();
 			}
 			else if (entree[0] == 'A') // afficher les ascendants de l’élément de valeur x.
 			{

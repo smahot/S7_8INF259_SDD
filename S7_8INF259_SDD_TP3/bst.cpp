@@ -196,7 +196,12 @@ node* BST::_Print_ancetres(int d, node* pNode, vector<int> &ancetres)
 }
 void BST::Print_childrens(int d)
 {
-	_affichage_infixe(this->GetNode(d));
+	node* root = this->GetNode(d);
+	if (root != NULL)
+	{
+		if (root->gauche != NULL) _affichage_infixe(root->gauche);
+		if (root->droite != NULL) _affichage_infixe(root->droite);
+	}
 	cout << endl;
 }
 void BST::Niveau()
